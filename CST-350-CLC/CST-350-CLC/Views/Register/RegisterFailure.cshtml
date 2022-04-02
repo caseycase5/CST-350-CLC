@@ -1,0 +1,13 @@
+﻿@model CST_350_CLC.Models.UserModel
+
+<h1>Registration Failure</h1>
+
+<p>Sorry @Model.Username your registration failed.</p>
+<div>
+    <a asp-action="Registration">Back to Registration</a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

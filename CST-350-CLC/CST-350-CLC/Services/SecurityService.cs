@@ -13,6 +13,11 @@ namespace CST_350_CLC.Services {
             // a lookup to see if there is an item in the db
             return usersDAO.FindUserByNameAndPassword(user);
         }
+
+        public bool ValidRegister(UserModel user) {
+            // Executes the register method on the inputted values returns true if successful
+            return usersDAO.RegisterNewUser(user);
+        }
     }
 }
 

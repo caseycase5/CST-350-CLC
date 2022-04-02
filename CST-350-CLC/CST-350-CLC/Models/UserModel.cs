@@ -7,43 +7,43 @@ namespace CST_350_CLC.Models {
         public int Id { get; set; }
 
         [Required]
-        [StringLength(20, MinimumLength = 2)]
-        [DisplayName("User First Name")]
+        [StringLength(30, MinimumLength = 2)]
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
 
         [Required]
-        [StringLength(20, MinimumLength = 2)]
-        [DisplayName("User Last Name")]
+        [StringLength(30, MinimumLength = 2)]
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
-        [StringLength(20, MinimumLength = 4)]
-        [DisplayName("User Email Address")]
+        [StringLength(50, MinimumLength = 4)]
+        [DisplayName("Email Address")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(20, MinimumLength = 4)]
-        [DisplayName("User State")]
+        [StringLength(20, MinimumLength = 2)]
+        [DisplayName("State")]
         public string State { get; set; }
 
         [Required]
-        [DisplayName("User Age")]
+        [DisplayName("Age")]
         public int Age { get; set; }
 
         [Required]
-        [StringLength(20, MinimumLength = 2)]
-        [DisplayName("User Sex")]
+        [StringLength(10, MinimumLength = 1)]
+        [DisplayName("Sex")]
         public string Sex { get; set; }
 
         [Required]
-        [StringLength(20, MinimumLength = 4)]
+        [StringLength(30, MinimumLength = 4)]
         [DisplayName("Username")]
         public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [StringLength(20, MinimumLength = 4)]
+        [StringLength(50, MinimumLength = 6)]
         [DisplayName("Password")]
         public string Password { get; set; }
 
