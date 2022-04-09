@@ -1,6 +1,7 @@
 ﻿using CST_350_CLC.Models;
 using CST_350_CLC.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Configuration;
 
 namespace CST_350_CLC.Controllers {
     public class LoginController : Controller {
@@ -10,9 +11,9 @@ namespace CST_350_CLC.Controllers {
 
         public IActionResult ProcessLogin(UserModel userModel) {
             SecurityService securityService = new SecurityService();
-
-            if (securityService.IsValid(userModel))
+            if (securityService.IsValid(userModel)) {
                 return View("LoginSuccess", userModel);
+            }
             else
                 return View("LoginFailure", userModel);
         }
