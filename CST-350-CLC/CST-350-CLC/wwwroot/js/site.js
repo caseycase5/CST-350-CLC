@@ -7,5 +7,4 @@ function blinkeffect(selector) {
             blinkeffect(this);
         });
     });
-
 }
