@@ -1,30 +1,38 @@
 ﻿@model CST_350_CLC.Models.GameBoardModel
 
-<h1>Minesweeper Game</h1>
-<hr />
-<div>
-    <table class="table">
-        <thead>
-            Minesweeper Game
-        </thead>
-        <tbody class="table-bordered">
-            @for (int i = 0; i < Model.Size; i++)
-            {
-                <tr>
-                    @for (int j = 0; j < Model.Size; j++)
-                    {
-                        <td>
-                            <a class="btn btn-dark" href="/game/cellclick/@Model.Grid[i,j].Id">@Model.Grid[i,j].CurrentCellText</a>
-                        </td>
-                    }
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-<br />
-<div>
-    <p>
-        <a href="/game/index" class="btn btn-primary">Start Over</a>
-    </p>
-</div>
+    <h1>Minesweeper Game</h1>
+    <hr />
+    <div>
+        <table class="table" id="gameBoard">
+            <thead>
+                Minesweeper Game
+            </thead>
+
+            <tbody class="table-bordered">
+                
+                   @for (int i = 0; i < Model.Size; i++) {
+                    <tr>
+                       @for (int j = 0; j < Model.Size; j++) {
+                            <td>
+                                <div class="oneButton" id="@Model.Grid[i,j].Id">
+                                    <form>
+                                        <button class="btn-game btn-info" type="submit" value="@Model.Grid[i,j].Id" name="Id" asp-controller="Game" asp-action="CellClick">
+                                            <img />
+                                            @Model.Grid[i, j].CurrentCellText
+                                        </button>
+                                    </form>
+                                </div>
+
+                            </td>
+                             }
+                    </tr>
+                        }       
+            </tbody>
+        </table>
+        </div>
+        <br />
+        <div>
+            <p>
+                <a href="/game/index" class="btn btn-primary">Start Over</a>
+            </p>
+        </div>

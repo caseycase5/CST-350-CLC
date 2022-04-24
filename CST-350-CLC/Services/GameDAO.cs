@@ -103,7 +103,6 @@ namespace CST_350_CLC.Services {
             // Recursion algorithm executing after all cells have been recreated
             Console.WriteLine("Starting r/c: " + startingRow + startingCol);
             gameBoard.floodFill(startingRow, startingCol);
-
             // Updating the SQL server for all cells. Only things that need updates are visited & cell text
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 int row = 0;
@@ -141,9 +140,5 @@ namespace CST_350_CLC.Services {
             }
                 return gameBoard;
         }
-
-        // Flood Fill recursion algorithm
-
-
     }
 }

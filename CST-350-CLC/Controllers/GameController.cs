@@ -18,5 +18,9 @@ namespace CST_350_CLC.Controllers {
             Console.WriteLine("Id passed to update board function is: " + id);
             return View("Index", gameDAO.updateBoard(id));
         }
+
+        public IActionResult ShowUpdatedGrid(int id) {
+            return PartialView(gameDAO.updateBoard(id));
+        }
     }
 }

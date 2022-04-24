@@ -1,0 +1,24 @@
+﻿@model CST_350_CLC.Models.GameBoardModel
+<thead>
+    Minesweeper Game
+</thead>
+
+<tbody class="table-bordered">
+    <form>
+        @for (int i = 0; i < Model.Size; i++) {
+        <tr>
+            @for (int j = 0; j < Model.Size; j++) {
+                <td>
+                    <div class="oneButton" id="@Model.Grid[i,j].Id">
+                        <button class="btn-game btn-info" type="submit" value="@Model.Grid[i,j].Id" name="Id"
+                                asp-controller="Game" asp-action="CellClick">
+                            @Model.Grid[i, j].CurrentCellText
+                        </button>
+                    </div>
+
+                </td>
+            }
+        </tr>
+    }
+        </form>
+    </tbody>
