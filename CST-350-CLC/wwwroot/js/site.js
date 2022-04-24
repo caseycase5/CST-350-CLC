@@ -12,12 +12,30 @@ function blinkeffect(selector) {
 $(function () {
     console.log("Page is ready");
 
-    $(document).on('click', '.btn-game', function() {
-        event.preventDefault();
+    $(document).bind("contextmenu", function (e) {
+        e.preventDefault();
+        console.log("Right click. Preventing context menu.");
+    });
 
-        var buttonNumber = $(this).val();
-        console.log("Game button " + buttonNumber + " was clicked");
-        doButtonUpdate(buttonNumber);
+    $(document).on("mousedown", '.btn-game', function (event) {
+        switch (event.which) {
+            case 1:
+                // Left mouse click
+                event.preventDefault();
+                var buttonNumber = $(this).val();
+                console.log("Game button " + buttonNumber + " was clicked");
+                doButtonUpdate(buttonNumber);
+                break;
+            case 2:
+                // Middle mouse click
+                break;
+            case 3:
+                // Right mouse click
+                // add partial update that changes this cell's image to a flag.
+                break;
+            default:
+                alert('Nothing pressed');
+        }
     });
 });
 
