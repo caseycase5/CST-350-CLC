@@ -66,6 +66,10 @@ namespace CST_350_CLC.Services {
             int id = Id;
             int startingRow = 0;
             int startingCol = 0;
+            int liveCells = 0;
+            int safeCells = 0;
+            int visitedCells = 0;
+            bool gameLoss = false;
 
             GameBoardModel gameBoard = new GameBoardModel();
                     string query = "SELECT * FROM dbo.Cells";
@@ -79,20 +83,42 @@ namespace CST_350_CLC.Services {
                     SqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read()) {
+
                         // Case for the one cell that is clicked. Visited status is updated, cell text is changed to the cell's # of live neighbors and the floodfill algorithm is called
                         if(id == (int)reader[0]) {
                             gameBoard.Grid[((int)reader[1]), ((int)reader[2])] = new GameCellModel((int)reader[0], (int)reader[1], (int)reader[2], true, (bool)reader[4], (int)reader[5], reader[5].ToString());
-                            Console.WriteLine("Game cell at " + (int)reader[1] + " " + (int)reader[2] + " updated.");
+                           // Console.WriteLine("Game cell at " + (int)reader[1] + " " + (int)reader[2] + " updated.");
                             startingRow = (int)reader[1];
                             startingCol = (int)reader[2];
+
+                            // Determining if the user clicked on a bomb
+                            if((bool)reader[4] == true) {
+                                gameLoss = true;
+                                Console.WriteLine("GAME OVER. YOU CLICKED ON A BOMB!!!");
+                            }
                         }
 
                         // Case for all other cells that were not clicked on
                         else {
                             gameBoard.Grid[((int)reader[1]), ((int)reader[2])] = new GameCellModel((int)reader[0], (int)reader[1], (int)reader[2], (bool)reader[3], (bool)reader[4], (int)reader[5], (string)reader[6]);
-                            Console.WriteLine("Game cell at " + (int)reader[1] + " " + (int)reader[2] + " updated.");
+                            // Console.WriteLine("Game cell at " + (int)reader[1] + " " + (int)reader[2] + " updated.");
+                        }
+
+                        // Creating local variables for the number of Safe, Live, and Visited Cells
+                        if((bool)reader[4] == true) {
+                            liveCells++;
+                        }
+                        else {
+                            safeCells++;
+                        }
+                        if ((bool)reader[3] == true) {
+                            visitedCells++;
                         }
                     }
+
+                    // Finding safe, live, and visited cells
+                    Console.WriteLine("Safe Cells: " + safeCells);
+                    Console.WriteLine("Live Cells: " + liveCells);
                     connection.Close();
                 }
                 catch (Exception e) {
@@ -102,7 +128,7 @@ namespace CST_350_CLC.Services {
 
             // Recursion algorithm executing after all cells have been recreated
             Console.WriteLine("Starting r/c: " + startingRow + startingCol);
-            gameBoard.floodFill(startingRow, startingCol);
+            visitedCells = visitedCells + gameBoard.floodFill(startingRow, startingCol);
             // Updating the SQL server for all cells. Only things that need updates are visited & cell text
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 int row = 0;
@@ -132,13 +158,15 @@ namespace CST_350_CLC.Services {
                         connection.Close();
                         col++;
                         id++;
-                        Console.WriteLine("ID during creation is: " + id);
+                        //Console.WriteLine("ID during creation is: " + id);
                     }
                     row++;
                     col = 0;
                 }
             }
-                return gameBoard;
+            Console.WriteLine("Visited Cells: " + visitedCells);
+            Console.WriteLine("----------------------------------------------");
+            return gameBoard;
         }
     }
 }

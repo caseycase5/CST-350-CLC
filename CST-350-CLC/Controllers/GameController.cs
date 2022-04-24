@@ -14,13 +14,15 @@ namespace CST_350_CLC.Controllers {
             return View(gameDAO.startup());
         }
 
+        public IActionResult ShowUpdatedGrid(int id) {
+            return PartialView(gameDAO.updateBoard(id));
+        }
+
+
+        // Old method of processing clicks USE PARTIAL PAGE UPDATES VIA "ShowUpdatedGrid" and JS function.
         public IActionResult CellClick(int id) {
             Console.WriteLine("Id passed to update board function is: " + id);
             return View("Index", gameDAO.updateBoard(id));
-        }
-
-        public IActionResult ShowUpdatedGrid(int id) {
-            return PartialView(gameDAO.updateBoard(id));
         }
     }
 }

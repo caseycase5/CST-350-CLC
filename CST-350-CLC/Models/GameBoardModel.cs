@@ -12,10 +12,12 @@ namespace CST_350_CLC.Models {
         public int VisitedSafeCells { get; set; }
 
         // Constructors
+        
         public GameBoardModel(int size, int difficulty) {
             Size = size;
             Difficulty = difficulty;
             Grid = new GameCellModel[size, size];
+
         }
 
         public GameBoardModel() {
@@ -114,12 +116,12 @@ namespace CST_350_CLC.Models {
         } 
 
         // Recursive method to print cells with no live neighbors
-        public void floodFill(int row, int col) {
-            Console.WriteLine("Flood Fill Start.");
+        public int floodFill(int row, int col) {
+            //Console.WriteLine("Flood Fill Start.");
             if (row > -1 && row < Size && col > -1 && col < Size) {
                 if (Grid[row, col].LiveNeighbors > 0 && Grid[row, col].Live == false) {
                     VisitedSafeCells++;
-                    return;
+                    return VisitedSafeCells;
                 }
 
                 else {
@@ -207,8 +209,8 @@ namespace CST_350_CLC.Models {
                     }
                 }
             }
-            Console.WriteLine("Flood Fill End.");
-            return;
+            //Console.WriteLine("Flood Fill End.");
+            return VisitedSafeCells;
         }
 
     }
