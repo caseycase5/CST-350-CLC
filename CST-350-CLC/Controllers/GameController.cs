@@ -24,5 +24,11 @@ namespace CST_350_CLC.Controllers {
             Console.WriteLine("Id passed to update board function is: " + id);
             return View("Index", gameDAO.updateBoard(id));
         }
+
+        // Save Game Method. Reference the SavesDAO file to execute
+
+
+        // Show Saved Games Method. Reference the SavesDAO file to execute
+
     }
 }

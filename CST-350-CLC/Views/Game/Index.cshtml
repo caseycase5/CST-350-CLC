@@ -31,8 +31,16 @@
         </table>
         </div>
         <br />
-        <div>
-            <p>
-                <a href="/game/index" class="btn btn-primary">Start Over</a>
-            </p>
+        <div id="buttons">
+            <a href="/game/index" class="btn btn-primary">Start Over</a>
+            <br /><br />
+
+            <form id="saveGame">
+                <button class="btn btn-primary" type="submit" asp-controller="Game" asp-action="SaveGame">Save Game</button>
+            </form>
+            <br />
+
+            <form id="showSavedGames">
+                <button class="btn btn-primary" type="submit" asp-controller="Game" asp-action="ShowSavedGames">Show Saved Games</button>
+            </form>
         </div>
