@@ -10,8 +10,8 @@
             @for (int j = 0; j < Model.Size; j++) {
                 <td>
                     <div class="oneButton" id="@Model.Grid[i,j].Id">
-                        <button class="btn-game btn-info" type="submit" value="@Model.Grid[i,j].Id" name="Id"
-                                asp-controller="Game" asp-action="CellClick">
+                        <button class="btn-game btn-info" type="submit" value="@Model.Grid[i,j].Id" name="Id" asp-controller="Game" asp-action="CellClick">
+                            <img id="cellImage @Model.Grid[i,j].Id" src="" />
                             @Model.Grid[i, j].CurrentCellText
                         </button>
                     </div>

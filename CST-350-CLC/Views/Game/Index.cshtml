@@ -17,7 +17,7 @@
                                 <div class="oneButton" id="@Model.Grid[i,j].Id">
                                     <form>
                                         <button class="btn-game btn-info" type="submit" value="@Model.Grid[i,j].Id" name="Id" asp-controller="Game" asp-action="CellClick">
-                                            <img />
+                                            <img id="cellImage @Model.Grid[i,j].Id" src=""/>
                                             @Model.Grid[i, j].CurrentCellText
                                         </button>
                                     </form>

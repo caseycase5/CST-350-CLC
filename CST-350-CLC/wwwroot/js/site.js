@@ -30,8 +30,18 @@ $(function () {
                 // Middle mouse click
                 break;
             case 3:
-                // Right mouse click
-                // add partial update that changes this cell's image to a flag.
+                // Right mouse click. Image locations are "/img/imageName"
+                // App checks to see if there is a flag already in that cell, if not, it will place a flag photo
+                var buttonNumber = $(this).val();
+                if (document.getElementById("cellImage " + buttonNumber).src == "https://localhost:5001/img/flag.png") {
+                    document.getElementById("cellImage " + buttonNumber).src = "";
+                    console.log("Cell already has an image");
+                }
+                else {
+                    document.getElementById("cellImage " + buttonNumber).src = "/img/flag.png";
+                    console.log("Cell was given an image");
+                }
+                
                 break;
             default:
                 alert('Nothing pressed');
